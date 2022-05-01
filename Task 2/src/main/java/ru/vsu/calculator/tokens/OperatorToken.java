@@ -13,6 +13,16 @@ public class OperatorToken extends Token {
 
     public OperatorToken(Function<Double[], Double> function, OperatorAssociativity operatorAssociativity, int priority, int paramsCount) {
         super(TokenType.OPERATOR);
+
+        if (function == null)
+            throw new IllegalArgumentException("Function can't be null.");
+
+        if (priority < 0)
+            throw new IllegalArgumentException("Priority can't be less than zero.");
+
+        if (paramsCount < 1)
+            throw new IllegalArgumentException("ParamsCount can't be less than one.");
+
         _function = function;
         _operatorAssociativity = operatorAssociativity;
         _priority = priority;

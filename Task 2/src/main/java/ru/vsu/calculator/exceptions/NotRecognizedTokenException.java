@@ -7,6 +7,10 @@ public class NotRecognizedTokenException extends ConvertToPolishNotationExceptio
 
     public NotRecognizedTokenException(Token token) {
         super("Unable to recognize token.");
+
+        if (token == null)
+            throw new IllegalArgumentException("Token can't be null.");
+
         _token = token;
     }
 

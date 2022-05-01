@@ -9,6 +9,9 @@ public final class ToPolishNotationConverter {
     }
 
     public static Iterable<Token> convert(Iterable<Token> infixTokenNotation) throws ConvertToPolishNotationException {
+        if (infixTokenNotation == null)
+            throw new IllegalArgumentException("InfixTokenNotation can't be null.");
+
         Queue<Token> outputQueue = new ArrayDeque<Token>();
         Stack<Token> opStack = new Stack<Token>();
 
@@ -53,7 +56,7 @@ public final class ToPolishNotationConverter {
 
                     opStack.pop();
 
-                    if(!opStack.empty() && opStack.peek().getTokenType() != TokenType.FUNCTION)
+                    if(!opStack.empty() && opStack.peek().getTokenType() == TokenType.FUNCTION)
                         outputQueue.add(opStack.pop());
 
                     break;

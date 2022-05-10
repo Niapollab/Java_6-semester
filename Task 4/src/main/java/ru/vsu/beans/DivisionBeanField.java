@@ -8,7 +8,7 @@ import ru.vsu.models.Division;
 /**
  * Represents DivisionBeanField.
  */
-public class DivisionBeanField<T> extends AbstractBeanField<T, String> {
+public class DivisionBeanField<T> extends AbstractBeanField<T, String> implements Converter<Division> {
     private static final AtomicInteger _idFactory = new AtomicInteger(-1);
 
     /**
@@ -17,7 +17,7 @@ public class DivisionBeanField<T> extends AbstractBeanField<T, String> {
      * @return Converted object.
      */
     @Override
-    protected Object convert(String arg0) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
+    public Division convert(String arg0) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
         return new Division(_idFactory.incrementAndGet(), arg0);
     }
 }

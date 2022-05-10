@@ -8,10 +8,9 @@ import java.text.SimpleDateFormat;
 /**
  * Represents DateBeanField.
  */
-public class DateBeanField<T> extends AbstractBeanField<T, String> {
+public class DateBeanField<T> extends AbstractBeanField<T, String> implements Converter<Date> {
     public static final String PATTERN = "dd.MM.yyyy";
     public static final Locale LOCALE = Locale.ENGLISH;
-
 
     /**
      * Convetrs arg0 to object.
@@ -19,7 +18,7 @@ public class DateBeanField<T> extends AbstractBeanField<T, String> {
      * @return Converted object.
      */
     @Override
-    protected Object convert(String arg0) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
+    public Date convert(String arg0) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
         try {
             return new SimpleDateFormat(PATTERN, LOCALE).parse(arg0);
         } catch (Exception e) {

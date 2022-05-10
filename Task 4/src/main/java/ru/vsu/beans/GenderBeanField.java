@@ -4,7 +4,15 @@ import com.opencsv.exceptions.*;
 import com.opencsv.bean.AbstractBeanField;
 import ru.vsu.models.Gender;
 
+/**
+ * Represents GenderBeanField.
+ */
 public class GenderBeanField<T> extends AbstractBeanField<T, String> {
+    /**
+     * Convetrs arg0 to object.
+     * @param arg0 Raw object.
+     * @return Converted object.
+     */
     @Override
     protected Object convert(String arg0) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
         switch (arg0.toLowerCase()) {

@@ -35,9 +35,9 @@ public final class ToPolishNotationConverter {
                         OperatorToken op1 = (OperatorToken)token;
                         OperatorToken op2 = tryPeekOperatorToken(opStack);
 
-                        while (op2 != null && op2.getPriority() == op1.getPriority()
+                        while (op2 != null && (op2.getPriority() == op1.getPriority()
                             ? op1.getOperatorAssociativity() == OperatorAssociativity.LEFT
-                            : op2.getPriority() > op1.getPriority()) {
+                            : op2.getPriority() > op1.getPriority())) {
                             outputQueue.add(opStack.pop());
                             op2 = tryPeekOperatorToken(opStack);
                         }

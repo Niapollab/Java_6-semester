@@ -1,9 +1,10 @@
 package ru.vsu.calculator.tokens;
 
+import java.util.List;
 import java.util.function.Function;
 
 public class OperatorToken extends Token {
-    private final Function<Double[], Double> _function;
+    private final Function<List<Double>, Double> _function;
 
     private final OperatorAssociativity _operatorAssociativity;
 
@@ -11,7 +12,7 @@ public class OperatorToken extends Token {
 
     private final int _paramsCount;
 
-    public OperatorToken(Function<Double[], Double> function, OperatorAssociativity operatorAssociativity, int priority, int paramsCount) {
+    public OperatorToken(Function<List<Double>, Double> function, OperatorAssociativity operatorAssociativity, int priority, int paramsCount) {
         super(TokenType.OPERATOR);
 
         if (function == null)
@@ -41,8 +42,8 @@ public class OperatorToken extends Token {
         return _paramsCount;
     }
 
-    public double apply(Double[] params) {
-        if (params.length != _paramsCount)
+    public double apply(List<Double> params) {
+        if (params.size() != _paramsCount)
             throw new IllegalArgumentException();
 
         return _function.apply(params);

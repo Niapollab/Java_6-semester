@@ -9,34 +9,34 @@ public class OperatorTokenBuilderFactory implements TokenBuilderFactory {
 
     static {
         OperatorsList = new HashMap<Character, OperatorToken>();
-        OperatorsList.put('+', new OperatorToken(new Function<Double[], Double>() {
+        OperatorsList.put('+', new OperatorToken(new Function<List<Double>, Double>() {
             @Override
-            public Double apply(Double[] t) {
-                return t[0] + t[1];
+            public Double apply(List<Double> t) {
+                return t.get(0) + t.get(1);
             }
         }, OperatorAssociativity.LEFT, 1, 2));
-        OperatorsList.put('-', new OperatorToken(new Function<Double[], Double>() {
+        OperatorsList.put('-', new OperatorToken(new Function<List<Double>, Double>() {
             @Override
-            public Double apply(Double[] t) {
-                return t[0] - t[1];
+            public Double apply(List<Double> t) {
+                return t.get(0) - t.get(1);
             }
         }, OperatorAssociativity.LEFT, 1, 2));
-        OperatorsList.put('*', new OperatorToken(new Function<Double[], Double>() {
+        OperatorsList.put('*', new OperatorToken(new Function<List<Double>, Double>() {
             @Override
-            public Double apply(Double[] t) {
-                return t[0] * t[1];
+            public Double apply(List<Double> t) {
+                return t.get(0) * t.get(1);
             }
         }, OperatorAssociativity.LEFT, 2, 2));
-        OperatorsList.put('/', new OperatorToken(new Function<Double[], Double>() {
+        OperatorsList.put('/', new OperatorToken(new Function<List<Double>, Double>() {
             @Override
-            public Double apply(Double[] t) {
-                return t[0] / t[1];
+            public Double apply(List<Double> t) {
+                return t.get(0) / t.get(1);
             }
         }, OperatorAssociativity.LEFT, 2, 2));
-        OperatorsList.put('^', new OperatorToken(new Function<Double[], Double>() {
+        OperatorsList.put('^', new OperatorToken(new Function<List<Double>, Double>() {
             @Override
-            public Double apply(Double[] t) {
-                return Math.pow(t[0], t[1]);
+            public Double apply(List<Double> t) {
+                return Math.pow(t.get(0), t.get(1));
             }
         }, OperatorAssociativity.RIGHT, 3, 2));
     }

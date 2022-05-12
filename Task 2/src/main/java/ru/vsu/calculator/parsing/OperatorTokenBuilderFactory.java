@@ -12,31 +12,31 @@ public class OperatorTokenBuilderFactory implements TokenBuilderFactory {
         OperatorsList.put('+', new OperatorToken(new Function<List<Double>, Double>() {
             @Override
             public Double apply(List<Double> t) {
-                return t.get(0) + t.get(1);
+                return t.get(1) + t.get(0);
             }
         }, OperatorAssociativity.LEFT, 1, 2));
         OperatorsList.put('-', new OperatorToken(new Function<List<Double>, Double>() {
             @Override
             public Double apply(List<Double> t) {
-                return t.get(0) - t.get(1);
+                return t.get(1) - t.get(0);
             }
         }, OperatorAssociativity.LEFT, 1, 2));
         OperatorsList.put('*', new OperatorToken(new Function<List<Double>, Double>() {
             @Override
             public Double apply(List<Double> t) {
-                return t.get(0) * t.get(1);
+                return t.get(1) * t.get(0);
             }
         }, OperatorAssociativity.LEFT, 2, 2));
         OperatorsList.put('/', new OperatorToken(new Function<List<Double>, Double>() {
             @Override
             public Double apply(List<Double> t) {
-                return t.get(0) / t.get(1);
+                return t.get(1) / t.get(0);
             }
         }, OperatorAssociativity.LEFT, 2, 2));
         OperatorsList.put('^', new OperatorToken(new Function<List<Double>, Double>() {
             @Override
             public Double apply(List<Double> t) {
-                return Math.pow(t.get(0), t.get(1));
+                return Math.pow(t.get(1), t.get(0));
             }
         }, OperatorAssociativity.RIGHT, 3, 2));
     }

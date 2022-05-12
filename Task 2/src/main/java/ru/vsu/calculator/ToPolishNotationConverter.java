@@ -42,7 +42,7 @@ public final class ToPolishNotationConverter {
                             op2 = tryPeekOperatorToken(opStack);
                         }
 
-                        opStack.add(op1);
+                        opStack.push(op1);
                     }
                     else
                         throw new ConvertToPolishNotationException("Failed to cast token of type OPERATOR to OperatorToken.");
@@ -65,7 +65,10 @@ public final class ToPolishNotationConverter {
             }
         }
 
-        for (Token token : opStack) {
+        while (opStack.size() > 0)
+        {
+            Token token = opStack.pop();
+
             if (token.getTokenType() == TokenType.OPEN_BRACKET)
                 throw new MissedTokenException("The expression is missing an closing bracket.");
 

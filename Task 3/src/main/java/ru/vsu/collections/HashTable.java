@@ -18,6 +18,8 @@ public final class HashTable<K, V> implements Iterable<Map.Entry<K, V>>, Map<K, 
             throw new IllegalArgumentException();
 
         _entries = new ArrayList<List<HashTableEntry>>(density);
+        for (int i = 0; i < density; ++i)
+            _entries.add(null);
     }
 
     /**
@@ -168,13 +170,19 @@ public final class HashTable<K, V> implements Iterable<Map.Entry<K, V>>, Map<K, 
 
         List<HashTableEntry> entriesByHashCode = _entries.get(index);
         if (entriesByHashCode == null)
-            entriesByHashCode = _entries.set(index, new ArrayList<HashTableEntry>());
+        {
+            entriesByHashCode = new ArrayList<HashTableEntry>();
+            _entries.set(index, entriesByHashCode);
+        }
 
         HashTableEntry entry = internalGet(entriesByHashCode, key);
         if (entry != null)
             entry.setValue(value);
         else
+        {
             entriesByHashCode.add(new HashTableEntry(key, value));
+            ++_size;
+        }
 
         return value;
     }
@@ -209,6 +217,9 @@ public final class HashTable<K, V> implements Iterable<Map.Entry<K, V>>, Map<K, 
      */
     @Override
     public V remove(Object key) {
+        if (key == null)
+            throw new IllegalArgumentException();
+
         int index = calculateHash(key);
 
         List<HashTableEntry> entriesByHashCode = _entries.get(index);
@@ -226,6 +237,7 @@ public final class HashTable<K, V> implements Iterable<Map.Entry<K, V>>, Map<K, 
 
         V value = entriesByHashCode.get(removeIndex).getValue();
         entriesByHashCode.remove(removeIndex);
+        --_size;
 
         return value;
     }
